@@ -39,9 +39,6 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
 
   static const char* functionName = "processCallbacks";
 
-  // getDoubleParam( NDPluginCentroidsLowThreshold,   &lowThreshold);
-  // getDoubleParam( NDPluginCentroidsThresholdRatio, &thresholdRatio);
-
   // Check that we are getting 2D images.
   if (pArray->ndims != 2) {
     NDPluginDriver::endProcessCallbacks(pArray, true, true);
@@ -186,9 +183,9 @@ NDPluginCentroids::NDPluginCentroids(const char *portName, int queueSize, int bl
   createParam(NDPluginCentroidsOverlapMaxString,
     asynParamInt32, &NDPluginCentroidsOverlapMax);
   createParam(NDPluginCentroidsSumMinString,
-    asynParamInt32, &NDPluginCentroidsSumMin);
+    asynParamFloat64, &NDPluginCentroidsSumMin);
   createParam(NDPluginCentroidsSumMaxString,
-    asynParamInt32, &NDPluginCentroidsSumMax);
+    asynParamFloat64, &NDPluginCentroidsSumMax);
   createParam(NDPluginCentroidsFitPixels2DString,
     asynParamInt32, &NDPluginCentroidsFitPixels2D);
   createParam(NDPluginCentroidsFitPixels1DXString,
