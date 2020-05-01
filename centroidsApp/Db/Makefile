@@ -10,7 +10,7 @@ include $(TOP)/configure/CONFIG
 #----------------------------------------------------
 # Create and install (or just install)
 # databases, templates, substitutions like this
-# DB += centroids.template
+DB += NDCentroids.template
 
 #----------------------------------------------------
 # If <anyname>.db template is not named <anyname>*.template add

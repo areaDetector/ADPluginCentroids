@@ -1,0 +1,152 @@
+include "NDPluginBase.template"
+
+record(longout, "$(P)$(R)Threshold"){
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))THRESHOLD")
+	field(PINI, "1")
+}
+
+record(longin, "$(P)$(R)Threshold_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))THRESHOLD")
+	field(SCAN, "I/O Intr")
+}
+
+record(longout, "$(P)$(R)Box"){
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))BOX")
+	field(PINI, "1")
+}
+
+record(longin, "$(P)$(R)Box_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))BOX")
+	field(SCAN, "I/O Intr")
+}
+
+record(longout, "$(P)$(R)SearchBox"){
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))SEARCH_BOX")
+	field(PINI, "1")
+}
+
+record(longin, "$(P)$(R)SearchBox_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))SEARCH_BOX")
+	field(SCAN, "I/O Intr")
+}
+
+record(longout, "$(P)$(R)PixelPhoton"){
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))PIXEL_PHOTON")
+	field(PINI, "1")
+}
+
+record(longin, "$(P)$(R)PixelPhoton_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))PIXEL_PHOTON")
+	field(SCAN, "I/O Intr")
+}
+
+record(longout, "$(P)$(R)PixelBgnd"){
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))PIXEL_BGND")
+	field(PINI, "1")
+}
+
+record(longin, "$(P)$(R)PixelBgnd_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))PIXEL_BGND")
+	field(SCAN, "I/O Intr")
+}
+
+record(longout, "$(P)$(R)COMPhoton"){
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))COM_PHOTON")
+	field(PINI, "1")
+}
+
+record(longin, "$(P)$(R)COMPhoton_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))COM_PHOTON")
+	field(SCAN, "I/O Intr")
+}
+
+record(longout, "$(P)$(R)OverlapMax"){
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))OVERLAP_MAX")
+	field(PINI, "1")
+}
+
+record(longin, "$(P)$(R)OverlapMax_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))OVERLAP_MAX")
+	field(SCAN, "I/O Intr")
+}
+
+record(ao, "$(P)$(R)SumMin"){
+	field(DTYP, "asynFloat64")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))SUM_MIN")
+	field(PINI, "1")
+}
+
+record(ai, "$(P)$(R)SumMin_RBV"){
+	field(DTYP, "asynFloat64")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))SUM_MIN")
+	field(SCAN, "I/O Intr")
+}
+
+record(ao, "$(P)$(R)SumMax"){
+	field(DTYP, "asynFloat64")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))SUM_MAX")
+	field(PINI, "1")
+}
+
+record(ai, "$(P)$(R)SumMax_RBV"){
+	field(DTYP, "asynFloat64")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))SUM_MAX")
+	field(SCAN, "I/O Intr")
+}
+
+record(bo, "$(P)$(R)Fit2D"){
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_2D")
+	field(PINI, "1")
+}
+
+record(bi, "$(P)$(R)Fit2D_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_2D")
+	field(SCAN, "I/O Intr")
+}
+
+record(bo, "$(P)$(R)Fit1DX"){
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_1D_X")
+	field(PINI, "1")
+}
+
+record(bi, "$(P)$(R)Fit1DX_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_1D_X")
+	field(SCAN, "I/O Intr")
+}
+
+record(bo, "$(P)$(R)Fit1DY"){
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_1D_Y")
+	field(PINI, "1")
+}
+
+record(bi, "$(P)$(R)Fit1DY_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_1D_Y")
+	field(SCAN, "I/O Intr")
+}
+
+record(longin, "$(P)$(R)NPhotons_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))N_PHOTONS")
+	field(SCAN, "I/O Intr")
+}
+
