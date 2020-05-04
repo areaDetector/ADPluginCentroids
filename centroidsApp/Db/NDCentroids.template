@@ -62,13 +62,13 @@ record(longin, "$(P)$(R)PixelBgnd_RBV"){
 
 record(longout, "$(P)$(R)PixelCOM"){
 	field(DTYP, "asynInt32")
-	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))COM_PHOTON")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))PIXEL_COM")
 	field(PINI, "1")
 }
 
 record(longin, "$(P)$(R)PixelCOM_RBV"){
 	field(DTYP, "asynInt32")
-	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))COM_PHOTON")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))PIXEL_COM")
 	field(SCAN, "I/O Intr")
 }
 

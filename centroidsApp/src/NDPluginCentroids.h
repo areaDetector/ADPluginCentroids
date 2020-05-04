@@ -9,7 +9,7 @@
 #define NDPluginCentroidsSearchBoxString    "SEARCH_BOX"
 #define NDPluginCentroidsPixelPhotonString  "PIXEL_PHOTON"
 #define NDPluginCentroidsPixelBgndString    "PIXEL_BGND"
-#define NDPluginCentroidsCOMPhotonString    "COM_PHOTON"
+#define NDPluginCentroidsCOMPhotonString    "PIXEL_COM"
 #define NDPluginCentroidsOverlapMaxString   "OVERLAP_MAX"
 #define NDPluginCentroidsSumMinString       "SUM_MIN"
 #define NDPluginCentroidsSumMaxString       "SUM_MAX"
