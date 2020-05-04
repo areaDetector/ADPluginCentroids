@@ -44,7 +44,7 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
     NDPluginDriver::endProcessCallbacks(pArray, true, true);
     callParamCallbacks();
     asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR,
-              "%s::%s Please use 2D images for the Centroiding plugin",
+              "%s::%s Please use 2D images for the Centroiding plugin\n",
               driverName, functionName);
     return;
   }
@@ -97,7 +97,7 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
 
   if (centroids_calculate_params<uint16_t>(&params) != CENTROIDS_PARAMS_OK) {
     asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR,
-              "%s::%s Error in parameters",
+              "%s::%s Error in parameters\n",
               driverName, functionName);
     return;
   }
