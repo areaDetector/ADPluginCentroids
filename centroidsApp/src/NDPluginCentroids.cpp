@@ -204,12 +204,7 @@ NDPluginCentroids::NDPluginCentroids(const char *portName, int queueSize, int bl
 
   /* Set the plugin type string */
   setStringParam(NDPluginDriverPluginType, "NDPluginCentroids");
-
-  epicsSnprintf(versionString, sizeof(versionString), "%s.%s.%s",
-      CENTROIDS_GIT_REV, CENTROIDS_GIT_BRANCH,
-      CENTROIDS_GIT_VERSION);
-  setStringParam(NDDriverVersion, versionString);
-
+  setStringParam(NDDriverVersion, CENTROIDS_GIT_VERSION);
   setStringParam(NDPluginCentroidsStatusMsg, "OK");
 
   /* Try to connect to the array port */
