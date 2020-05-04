@@ -96,11 +96,13 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
   params.return_pixels = CENTROIDS_STORE_NONE;
 
   if (centroids_calculate_params<uint16_t>(&params) != CENTROIDS_PARAMS_OK) {
-    asynPrint(this->pasynUserSelf, ASYN_TRACE_ERROR,
-              "%s::%s Error in parameters\n",
-              driverName, functionName);
+    setIntegerParam(NDPluginCentroidsParamsValid, 0);
+    setStringParam(NDPluginCentroidsStatusMsg, "Invalid Parameters");
+    callParamCallbacks();
     return;
   }
+
+  setIntegerParam(NDPluginCentroidsParamsValid, 1);
 
   pOutput = this->pNDArrayPool->alloc(nDims, dims, NDUInt16, 0, NULL);
   this->pNDArrayPool->convert(pArray, &pScratch, NDUInt16);
@@ -130,6 +132,7 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
   }
 
   NDPluginDriver::endProcessCallbacks(pOutput, false, true);
+  setStringParam(NDPluginCentroidsStatusMsg, "Processed OK");
   callParamCallbacks();
 }
 
@@ -194,6 +197,10 @@ NDPluginCentroids::NDPluginCentroids(const char *portName, int queueSize, int bl
     asynParamInt32, &NDPluginCentroidsFitPixels1DY);
   createParam(NDPluginCentroidsNPhotonsString,
     asynParamInt32, &NDPluginCentroidsNPhotons);
+  createParam(NDPluginCentroidsParamsValidString,
+    asynParamInt32, &NDPluginCentroidsParamsValid);
+  createParam(NDPluginCentroidsStatusMsgString,
+    asynParamOctet, &NDPluginCentroidsStatusMsg);
 
   /* Set the plugin type string */
   setStringParam(NDPluginDriverPluginType, "NDPluginCentroids");
@@ -202,6 +209,8 @@ NDPluginCentroids::NDPluginCentroids(const char *portName, int queueSize, int bl
       CENTROIDS_GIT_REV, CENTROIDS_GIT_BRANCH,
       CENTROIDS_GIT_VERSION);
   setStringParam(NDDriverVersion, versionString);
+
+  setStringParam(NDPluginCentroidsStatusMsg, "OK");
 
   /* Try to connect to the array port */
   connectToArrayPort();

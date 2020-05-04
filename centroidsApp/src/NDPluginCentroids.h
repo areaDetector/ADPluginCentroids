@@ -17,6 +17,8 @@
 #define NDPluginCentroidsFitPixels1DXString "FIT_1D_X"
 #define NDPluginCentroidsFitPixels1DYString "FIT_1D_Y"
 #define NDPluginCentroidsNPhotonsString     "N_PHOTONS"
+#define NDPluginCentroidsParamsValidString  "PARAMS_VALID"
+#define NDPluginCentroidsStatusMsgString    "STATUS_MSG"
 
 
 /** Does image processing operations.
@@ -46,6 +48,8 @@ protected:
     int NDPluginCentroidsFitPixels1DX;
     int NDPluginCentroidsFitPixels1DY;
     int NDPluginCentroidsNPhotons;
+    int NDPluginCentroidsParamsValid;
+    int NDPluginCentroidsStatusMsg;
 
 private:
 

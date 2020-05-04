@@ -60,13 +60,13 @@ record(longin, "$(P)$(R)PixelBgnd_RBV"){
 	field(SCAN, "I/O Intr")
 }
 
-record(longout, "$(P)$(R)COMPhoton"){
+record(longout, "$(P)$(R)PixelCOM"){
 	field(DTYP, "asynInt32")
 	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))COM_PHOTON")
 	field(PINI, "1")
 }
 
-record(longin, "$(P)$(R)COMPhoton_RBV"){
+record(longin, "$(P)$(R)PixelCOM_RBV"){
 	field(DTYP, "asynInt32")
 	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))COM_PHOTON")
 	field(SCAN, "I/O Intr")
@@ -160,7 +160,18 @@ record(longin, "$(P)$(R)NPhotons_RBV"){
 	field(DTYP, "asynInt32")
 	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))N_PHOTONS")
 	field(SCAN, "I/O Intr")
-	field(ONAM, "Enabled")
-	field(ZNAM, "Disabled")
 }
 
+record(bi, "$(P)$(R)ParamsValid_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))PARAMS_VALID")
+	field(SCAN, "I/O Intr")
+	field(ONAM, "Valid")
+	field(ZNAM, "Invalid")
+}
+
+record(stringin, "$(P)$(R)StatusMessage_RBV"){
+	field(DTYP, "asynOctetRead")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))STATUS_MSG")
+	field(SCAN, "I/O Intr")
+}

@@ -1,0 +1,13 @@
+file "NDPluginBase_settings.req", P=$(P), R=$(R)
+$(P)$(R)Threshold
+$(P)$(R)Box
+$(P)$(R)SearchBox
+$(P)$(R)PixelPhoton
+$(P)$(R)PixelBgnd
+$(P)$(R)PixelCOM
+$(P)$(R)OverlapMax
+$(P)$(R)SumMin
+$(P)$(R)SumMax
+$(P)$(R)Fit2D
+$(P)$(R)Fit1DX
+$(P)$(R)Fit1DY
