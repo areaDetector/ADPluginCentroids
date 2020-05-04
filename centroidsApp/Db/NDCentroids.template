@@ -112,55 +112,55 @@ record(bo, "$(P)$(R)Fit2D"){
 	field(DTYP, "asynInt32")
 	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_2D")
 	field(PINI, "1")
-	field(ONAM, "On")
-	field(ZNAM, "Off")
+	field(ONAM, "Enabled")
+	field(ZNAM, "Disabled")
 }
 
 record(bi, "$(P)$(R)Fit2D_RBV"){
 	field(DTYP, "asynInt32")
 	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_2D")
 	field(SCAN, "I/O Intr")
-	field(ONAM, "On")
-	field(ZNAM, "Off")
+	field(ONAM, "Enabled")
+	field(ZNAM, "Disabled")
 }
 
 record(bo, "$(P)$(R)Fit1DX"){
 	field(DTYP, "asynInt32")
 	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_1D_X")
 	field(PINI, "1")
-	field(ONAM, "On")
-	field(ZNAM, "Off")
+	field(ONAM, "Enabled")
+	field(ZNAM, "Disabled")
 }
 
 record(bi, "$(P)$(R)Fit1DX_RBV"){
 	field(DTYP, "asynInt32")
 	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_1D_X")
 	field(SCAN, "I/O Intr")
-	field(ONAM, "On")
-	field(ZNAM, "Off")
+	field(ONAM, "Enabled")
+	field(ZNAM, "Disabled")
 }
 
 record(bo, "$(P)$(R)Fit1DY"){
 	field(DTYP, "asynInt32")
 	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_1D_Y")
 	field(PINI, "1")
-	field(ONAM, "On")
-	field(ZNAM, "Off")
+	field(ONAM, "Enabled")
+	field(ZNAM, "Disabled")
 }
 
 record(bi, "$(P)$(R)Fit1DY_RBV"){
 	field(DTYP, "asynInt32")
 	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))FIT_1D_Y")
 	field(SCAN, "I/O Intr")
-	field(ONAM, "On")
-	field(ZNAM, "Off")
+	field(ONAM, "Enabled")
+	field(ZNAM, "Disabled")
 }
 
 record(longin, "$(P)$(R)NPhotons_RBV"){
 	field(DTYP, "asynInt32")
 	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))N_PHOTONS")
 	field(SCAN, "I/O Intr")
-	field(ONAM, "On")
-	field(ZNAM, "Off")
+	field(ONAM, "Enabled")
+	field(ZNAM, "Disabled")
 }
 
