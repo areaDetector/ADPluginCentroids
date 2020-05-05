@@ -176,7 +176,7 @@ record(stringin, "$(P)$(R)StatusMessage_RBV"){
 	field(SCAN, "I/O Intr")
 }
 
-record(bo, "$(P)$(R)TagPhotons"){
+record(bo, "$(P)$(R)TagPixels"){
 	field(DTYP, "asynInt32")
 	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TAG_PIXELS")
 	field(PINI, "1")
@@ -184,7 +184,7 @@ record(bo, "$(P)$(R)TagPhotons"){
 	field(ZNAM, "Disabled")
 }
 
-record(bi, "$(P)$(R)TagPhotons_RBV"){
+record(bi, "$(P)$(R)TagPixels_RBV"){
 	field(DTYP, "asynInt32")
 	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))TAG_PIXELS")
 	field(SCAN, "I/O Intr")
