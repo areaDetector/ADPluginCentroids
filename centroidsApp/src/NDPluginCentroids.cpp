@@ -74,6 +74,7 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
   getIntegerParam(NDPluginCentroidsOverlapMax,   &params.overlap_max);
   getDoubleParam(NDPluginCentroidsSumMin,        &params.sum_min);
   getDoubleParam(NDPluginCentroidsSumMax,        &params.sum_max);
+  getIntegerParam(NDPluginCentroidsTagPixels,    &params.tag_pixels);
 
   int fit_2d, fit_1dx, fit_1dy;
   getIntegerParam(NDPluginCentroidsFitPixels2D,  &fit_2d);
@@ -166,7 +167,6 @@ NDPluginCentroids::NDPluginCentroids(const char *portName, int queueSize, int bl
       asynInt32ArrayMask | asynFloat64ArrayMask | asynGenericPointerMask,
       0, 1, priority, stackSize, 1)
 {
-  char versionString[20];
   //static const char *functionName = "NDPluginCentroids";
 
   // Create parameter library
@@ -201,6 +201,8 @@ NDPluginCentroids::NDPluginCentroids(const char *portName, int queueSize, int bl
     asynParamInt32, &NDPluginCentroidsParamsValid);
   createParam(NDPluginCentroidsStatusMsgString,
     asynParamOctet, &NDPluginCentroidsStatusMsg);
+  createParam(NDPluginCentroidsTagPixelsString,
+    asynParamInt32, &NDPluginCentroidsTagPixels);
 
   /* Set the plugin type string */
   setStringParam(NDPluginDriverPluginType, "NDPluginCentroids");

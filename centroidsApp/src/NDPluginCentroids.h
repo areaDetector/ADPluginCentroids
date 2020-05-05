@@ -3,7 +3,6 @@
 
 #include "NDPluginDriver.h"
 
-/* Output data type */
 #define NDPluginCentroidsThresholdString    "THRESHOLD"
 #define NDPluginCentroidsBoxString          "BOX"
 #define NDPluginCentroidsSearchBoxString    "SEARCH_BOX"
@@ -19,10 +18,8 @@
 #define NDPluginCentroidsNPhotonsString     "N_PHOTONS"
 #define NDPluginCentroidsParamsValidString  "PARAMS_VALID"
 #define NDPluginCentroidsStatusMsgString    "STATUS_MSG"
+#define NDPluginCentroidsTagPixelsString    "TAG_PIXELS"
 
-
-/** Does image processing operations.
- */
 class NDPluginCentroids : public NDPluginDriver {
 public:
     NDPluginCentroids(const char *portName, int queueSize,
@@ -34,7 +31,7 @@ public:
     /* These methods override the virtual methods in the base class */
     void processCallbacks(NDArray *pArray);
 
-protected:
+private:
     int NDPluginCentroidsThreshold;
     int NDPluginCentroidsBox;
     int NDPluginCentroidsSearchBox;
@@ -50,9 +47,7 @@ protected:
     int NDPluginCentroidsNPhotons;
     int NDPluginCentroidsParamsValid;
     int NDPluginCentroidsStatusMsg;
-
-private:
-
+    int NDPluginCentroidsTagPixels;
 };
 
 #endif
