@@ -40,7 +40,9 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
 
   static const char* functionName = "processCallbacks";
 
-  int nDims = 2;
+  /* Call the base class method */
+  NDPluginDriver::beginProcessCallbacks(pArray);
+
   size_t dims[2];
   dims[0] = pArray->dims[0].size;
   dims[1] = pArray->dims[1].size;
@@ -54,9 +56,6 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
               driverName, functionName);
     return;
   }
-
-  /* Call the base class method */
-  NDPluginDriver::beginProcessCallbacks(pArray);
 
   // Set the parameters from the parameter library
 
@@ -108,18 +107,17 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
 
   setIntegerParam(NDPluginCentroidsParamsValid, 1);
 
+  // Convert the image to uint16_t as this is what is needed for centroiding
+  this->pNDArrayPool->convert(pArray, &pScratch, NDUInt16);
+
   if (output_map) {
     params.return_map = false;
     pOutput_data = NULL;
   } else {
     params.return_map = true;
-
-    pOutput = this->pNDArrayPool->alloc(nDims, dims, NDUInt16, 0, NULL);
+    pOutput = this->pNDArrayPool->copy(pScratch, NULL, false);
     pOutput_data = (uint16_t*)pOutput->pData;
   }
-
-
-  this->pNDArrayPool->convert(pArray, &pScratch, NDUInt16);
 
   // Setup the output
 
@@ -141,10 +139,13 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
 
   if (output_map) {
     this->lock();
-    size_t opDims[2];
-    opDims[1] = table_cols;
-    opDims[0] = photon_table->size() / table_cols;
-    pOutput = this->pNDArrayPool->alloc(2, opDims, NDFloat64, 0, NULL);
+    NDDimension_t opDims[ND_ARRAY_MAX_DIMS];
+    memset(opDims, 0, sizeof(NDDimension_t) * ND_ARRAY_MAX_DIMS);
+    opDims[1].size = table_cols;
+    opDims[1].binning = 1;
+    opDims[0].size = photon_table->size() / table_cols;
+    opDims[0].binning = 1;
+    this->pNDArrayPool->convert(pScratch, &pOutput, NDFloat64, opDims);
     double *data = (double*)pOutput->pData;
     this->unlock();
     for(PhotonTable<double>::size_type i = 0; i != photon_table->size(); i++) {
@@ -164,8 +165,9 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
     delete photon_table;
   }
 
-  NDPluginDriver::endProcessCallbacks(pOutput, false, true);
   setStringParam(NDPluginCentroidsStatusMsg, "Processed OK");
+
+  NDPluginDriver::endProcessCallbacks(pOutput, false, true);
   callParamCallbacks();
 }
 
