@@ -36,8 +36,14 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
    */
   NDArray *pScratch = NULL;
   NDArray *pOutput = NULL;
+  uint16_t *pOutput_data;
 
   static const char* functionName = "processCallbacks";
+
+  int nDims = 2;
+  size_t dims[2];
+  dims[0] = pArray->dims[0].size;
+  dims[1] = pArray->dims[1].size;
 
   // Check that we are getting 2D images.
   if (pArray->ndims != 2) {
@@ -51,11 +57,6 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
 
   /* Call the base class method */
   NDPluginDriver::beginProcessCallbacks(pArray);
-
-  int nDims = 2;
-  size_t dims[2];
-  dims[0] = pArray->dims[0].size;
-  dims[1] = pArray->dims[1].size;
 
   // Set the parameters from the parameter library
 
@@ -90,10 +91,12 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
       params.fit_pixels |= CENTROIDS_FIT_1D_Y;
   }
 
+  int output_map = 0;
+  getIntegerParam(NDPluginCentroidsOutputMode,   &output_map);
+
   params.n = 1;
   params.x = dims[1];
   params.y = dims[0];
-  params.return_map = true;
   params.return_pixels = CENTROIDS_STORE_NONE;
 
   if (centroids_calculate_params<uint16_t>(&params) != CENTROIDS_PARAMS_OK) {
@@ -105,7 +108,17 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
 
   setIntegerParam(NDPluginCentroidsParamsValid, 1);
 
-  pOutput = this->pNDArrayPool->alloc(nDims, dims, NDUInt16, 0, NULL);
+  if (output_map) {
+    params.return_map = false;
+    pOutput_data = NULL;
+  } else {
+    params.return_map = true;
+
+    pOutput = this->pNDArrayPool->alloc(nDims, dims, NDUInt16, 0, NULL);
+    pOutput_data = (uint16_t*)pOutput->pData;
+  }
+
+
   this->pNDArrayPool->convert(pArray, &pScratch, NDUInt16);
 
   // Setup the output
@@ -118,14 +131,28 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
   this->unlock();
 
   centroids_process<uint16_t, double>((uint16_t*)pScratch->pData,
-                                      (uint16_t*)pOutput->pData,
+                                      pOutput_data,
                                       photon_table,
                                       pixels, params);
 
+  int table_cols = centroids_calculate_table_cols(params);
+
+  // If we are outputting the table, then create the array
+
+  if (output_map) {
+    this->lock();
+    size_t opDims[2];
+    opDims[1] = table_cols;
+    opDims[0] = photon_table->size() / table_cols;
+    pOutput = this->pNDArrayPool->alloc(2, opDims, NDFloat64, 0, NULL);
+    double *data = (double*)pOutput->pData;
+    this->unlock();
+    for(PhotonTable<double>::size_type i = 0; i != photon_table->size(); i++) {
+      data[i] = (*photon_table)[i];
+    }
+  }
   // Take the lock again since we are accessing the parameter library
   this->lock();
-
-  int table_cols = centroids_calculate_table_cols(params);
 
   setIntegerParam(NDPluginCentroidsNPhotons, photon_table->size() / table_cols);
 
@@ -208,6 +235,8 @@ NDPluginCentroids::NDPluginCentroids(const char *portName, int queueSize, int bl
     asynParamOctet, &NDPluginCentroidsStatusMsg);
   createParam(NDPluginCentroidsTagPixelsString,
     asynParamInt32, &NDPluginCentroidsTagPixels);
+  createParam(NDPluginCentroidsOutputModeString,
+    asynParamInt32, &NDPluginCentroidsOutputMode);
 
   /* Set the plugin type string */
   setStringParam(NDPluginDriverPluginType, "NDPluginCentroids");

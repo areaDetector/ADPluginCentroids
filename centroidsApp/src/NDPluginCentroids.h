@@ -19,6 +19,7 @@
 #define NDPluginCentroidsParamsValidString  "PARAMS_VALID"
 #define NDPluginCentroidsStatusMsgString    "STATUS_MSG"
 #define NDPluginCentroidsTagPixelsString    "TAG_PIXELS"
+#define NDPluginCentroidsOutputModeString   "OUTPUT_MODE"
 
 class NDPluginCentroids : public NDPluginDriver {
 public:
@@ -48,6 +49,7 @@ private:
     int NDPluginCentroidsParamsValid;
     int NDPluginCentroidsStatusMsg;
     int NDPluginCentroidsTagPixels;
+    int NDPluginCentroidsOutputMode;
 };
 
 #endif

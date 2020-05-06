@@ -191,3 +191,23 @@ record(bi, "$(P)$(R)TagPixels_RBV"){
 	field(ONAM, "Enabled")
 	field(ZNAM, "Disabled")
 }
+
+record(mbbo, "$(P)$(R)OutputMode"){
+	field(DTYP, "asynInt32")
+	field(OUT,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))OUTPUT_MODE")
+	field(ZRST, "IMAGE")
+	field(ONST, "PHOTONS")
+	field(ZRVL, "0")
+	field(ONVL, "1")
+	field(PINI, "1")
+}
+
+record(mbbi, "$(P)$(R)OutputMode_RBV"){
+	field(DTYP, "asynInt32")
+	field(INP,  "@asyn($(PORT),$(ADDR),$(TIMEOUT))OUTPUT_MODE")
+	field(SCAN, "I/O Intr")
+	field(ZRST, "IMAGE")
+	field(ONST, "PHOTONS")
+	field(ZRVL, "0")
+	field(ONVL, "1")
+}
