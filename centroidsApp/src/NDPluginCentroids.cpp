@@ -90,8 +90,8 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
       params.fit_pixels |= CENTROIDS_FIT_1D_Y;
   }
 
-  int output_map = 0;
-  getIntegerParam(NDPluginCentroidsOutputMode,   &output_map);
+  int output_mode = 0;
+  getIntegerParam(NDPluginCentroidsOutputMode,   &output_mode);
 
   params.n = 1;
   params.x = dims[1];
@@ -110,7 +110,7 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
   // Convert the image to uint16_t as this is what is needed for centroiding
   this->pNDArrayPool->convert(pArray, &pScratch, NDUInt16);
 
-  if (output_map) {
+  if (output_mode) {
     params.return_map = false;
     pOutput_data = NULL;
   } else {
@@ -137,7 +137,7 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
 
   // If we are outputting the table, then create the array
 
-  if (output_map) {
+  if (output_mode) {
     this->lock();
     NDDimension_t opDims[ND_ARRAY_MAX_DIMS];
     memset(opDims, 0, sizeof(NDDimension_t) * ND_ARRAY_MAX_DIMS);
