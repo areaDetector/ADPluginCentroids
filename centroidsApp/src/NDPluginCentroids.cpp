@@ -117,19 +117,24 @@ void NDPluginCentroids::processCallbacks(NDArray *pArray)
 
   this->unlock();
 
-  size_t nphotons = centroids_process<uint16_t, double>((uint16_t*)pScratch->pData,
-                                                        (uint16_t*)pOutput->pData,
-                                                        photon_table,
-                                                        pixels, params);
+  centroids_process<uint16_t, double>((uint16_t*)pScratch->pData,
+                                      (uint16_t*)pOutput->pData,
+                                      photon_table,
+                                      pixels, params);
 
-  // Take the lock again since we are accessing the parameter library and
-  // these calculations are not time consuming
+  // Take the lock again since we are accessing the parameter library
   this->lock();
 
-  setIntegerParam(NDPluginCentroidsNPhotons, nphotons);
+  int table_cols = centroids_calculate_table_cols(params);
+
+  setIntegerParam(NDPluginCentroidsNPhotons, photon_table->size() / table_cols);
 
   if (pScratch != NULL) {
     pScratch->release();
+  }
+
+  if (photon_table != NULL) {
+    delete photon_table;
   }
 
   NDPluginDriver::endProcessCallbacks(pOutput, false, true);

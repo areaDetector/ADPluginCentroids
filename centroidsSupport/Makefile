@@ -8,8 +8,6 @@ include $(TOP)/configure/CONFIG
 # for Linux and Windows.  The soft links for Linux were manually created.
 
 INC += centroids.h
-INC += lmmin.h
-INC += lmstruct.h
 LIB_INSTALLS_Linux += ../os/linux-x86_64/libcentroids.a
 
 #=============================
